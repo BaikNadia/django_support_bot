@@ -38,7 +38,7 @@ django_support_bot/
 
 ```bash
 # Клонируйте репозиторий
-git clone <ваш-репозиторий>
+git clone https://github.com/BaikNadia/django_support_bot.git
 cd django_support_bot
 
 # Создайте виртуальное окружение
@@ -311,10 +311,6 @@ pip install --upgrade python-telegram-bot
 
 MIT License - смотрите файл LICENSE
 
-## 📞 Контакты
 
-Если у вас есть вопросы или предложения:
-- Создайте Issue в репозитории
-- Напишите в Telegram: [@your_username]
 
 ---
