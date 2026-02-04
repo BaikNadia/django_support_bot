@@ -1,0 +1,86 @@
+{% extends 'advice_app/base.html' %}
+
+{% block title %}О проекте - Советы Доброты{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="text-center mb-5">
+            <div class="emoji-large">🤗</div>
+            <h1 class="fw-bold mb-3">О проекте "Советы Доброты"</h1>
+        </div>
+
+        <div class="advice-card p-5">
+            <h3 class="fw-bold mb-4"><i class="fas fa-heart text-pink me-2"></i>Наша миссия</h3>
+            <p class="fs-5 mb-4">
+                Мы создали этот проект, чтобы каждый человек в трудную минуту мог найти слова поддержки,
+                ободрения и мотивации. Иногда достаточно одной фразы, чтобы изменить настроение и взгляд на ситуацию.
+            </p>
+
+            <h3 class="fw-bold mb-4 mt-5"><i class="fas fa-robot text-primary me-2"></i>Телеграм бот</h3>
+            <p class="fs-5 mb-4">
+                Наш Telegram-бот — это удобный способ получать поддержку прямо в мессенджере.
+                Просто отправь команду или нажми кнопку, и бот поделится с тобой добрыми словами.
+            </p>
+
+            <div class="text-center my-4">
+                <a href="https://t.me/your_bot_username" class="telegram-btn btn-lg" target="_blank">
+                    <i class="fab fa-telegram-plane me-2"></i>Перейти к боту
+                </a>
+            </div>
+
+            <h3 class="fw-bold mb-4 mt-5"><i class="fas fa-code text-success me-2"></i>Технологии</h3>
+            <div class="row text-center">
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="p-3 bg-light rounded">
+                        <i class="fab fa-python fa-2x text-primary mb-2"></i>
+                        <p class="mb-0 fw-bold">Python</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="p-3 bg-light rounded">
+                        <i class="fab fa-django fa-2x text-success mb-2"></i>
+                        <p class="mb-0 fw-bold">Django</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="p-3 bg-light rounded">
+                        <i class="fas fa-database fa-2x text-info mb-2"></i>
+                        <p class="mb-0 fw-bold">SQLite</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="p-3 bg-light rounded">
+                        <i class="fab fa-bootstrap fa-2x text-purple mb-2"></i>
+                        <p class="mb-0 fw-bold">Bootstrap</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="fw-bold mb-4 mt-5"><i class="fas fa-user text-warning me-2"></i>Автор проекта</h3>
+            <div class="d-flex align-items-center bg-light p-4 rounded">
+                <div class="me-4">
+                    <i class="fas fa-user-circle fa-4x text-secondary"></i>
+                </div>
+                <div>
+                    <h4 class="fw-bold mb-1">Байкова Надежда</h4>
+                    <p class="text-muted mb-2">Разработчик и автор проекта</p>
+                    <p class="mb-0">
+                        Создала этот проект с целью поделиться добротой и поддержкой.
+                        Каждый совет добавляется с любовью и заботой.
+                    </p>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="{% url 'license' %}" class="btn btn-outline-secondary me-2">
+                    <i class="fas fa-file-contract me-2"></i>Лицензия MIT
+                </a>
+                <a href="{% url 'home' %}" class="btn btn-primary-custom">
+                    <i class="fas fa-home me-2"></i>На главную
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
