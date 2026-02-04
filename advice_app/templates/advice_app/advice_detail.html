@@ -1,0 +1,77 @@
+{% extends 'advice_app/base.html' %}
+
+{% block title %}Совет #{{ advice.id }} - Советы Доброты{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'all_advice' %}">Все советы</a></li>
+                <li class="breadcrumb-item active">Совет #{{ advice.id }}</li>
+            </ol>
+        </nav>
+
+        <div class="advice-card p-5">
+            <div class="d-flex justify-content-between align-items-start mb-4">
+                <span class="category-badge {{ advice.category }}">
+                    {{ advice.get_category_display }}
+                </span>
+                <small class="text-muted">ID: {{ advice.id }}</small>
+            </div>
+
+            <div class="advice-text fs-4">
+                {{ advice.text }}
+            </div>
+
+            <hr class="my-4">
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="bg-light p-3 rounded">
+                        <h6><i class="fas fa-calendar-alt me-2"></i>Дата добавления</h6>
+                        <p class="mb-0">{{ advice.created_at|date:"d.m.Y H:i" }}</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="bg-light p-3 rounded">
+                        <h6><i class="fas fa-tag me-2"></i>Категория</h6>
+                        <p class="mb-0">{{ advice.get_category_display }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex flex-wrap gap-3 mt-5">
+                <button class="btn btn-primary copy-advice" data-text="{{ advice.text }}">
+                    <i class="far fa-copy me-2"></i>Скопировать совет
+                </button>
+                <a href="{% url 'category_advice' advice.category %}" class="btn btn-outline-primary">
+                    <i class="fas fa-filter me-2"></i>Ещё из этой категории
+                </a>
+                <a href="{% url 'random_advice' %}" class="btn btn-outline-secondary">
+                    <i class="fas fa-random me-2"></i>Случайный совет
+                </a>
+            </div>
+        </div>
+
+        <!-- Навигация между советами -->
+        <div class="row mt-4">
+            <div class="col-6">
+                {% if prev_advice %}
+                <a href="{% url 'advice_detail' prev_advice.id %}" class="btn btn-outline-primary w-100">
+                    <i class="fas fa-arrow-left me-2"></i>Предыдущий
+                </a>
+                {% endif %}
+            </div>
+            <div class="col-6">
+                {% if next_advice %}
+                <a href="{% url 'advice_detail' next_advice.id %}" class="btn btn-outline-primary w-100">
+                    Следующий <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
