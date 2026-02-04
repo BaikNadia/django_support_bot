@@ -1,0 +1,48 @@
+{% extends 'advice_app/base.html' %}
+
+{% block title %}Случайный совет - Советы Доброты{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="text-center mb-5">
+            <div class="emoji-large">🎲</div>
+            <h1 class="fw-bold mb-3">Случайный совет</h1>
+            <p class="lead text-muted">Каждый раз — новое вдохновение!</p>
+
+            <div class="d-flex justify-content-center gap-3 mb-4">
+                <button id="random-advice-btn" class="btn btn-primary-custom">
+                    <i class="fas fa-redo me-2"></i>Другой совет
+                </button>
+                <button id="copy-advice-btn" class="btn btn-outline-secondary copy-advice"
+                        data-text="{{ advice.text }}">
+                    <i class="far fa-copy me-2"></i>Скопировать
+                </button>
+            </div>
+        </div>
+
+        <!-- Отображение совета -->
+        <div class="advice-card p-5 text-center">
+            <span id="advice-category" class="category-badge {{ advice.category }}">
+                {{ advice.get_category_display }}
+            </span>
+            <div class="advice-text fs-3 my-4" id="advice-text">
+                {{ advice.text }}
+            </div>
+            <div class="mt-4">
+                <small class="text-muted">ID совета: {{ advice.id }}</small>
+            </div>
+        </div>
+
+        <!-- Навигация -->
+        <div class="text-center mt-5">
+            <a href="{% url 'home' %}" class="btn btn-outline-primary me-2">
+                <i class="fas fa-home me-2"></i>На главную
+            </a>
+            <a href="{% url 'all_advice' %}" class="btn btn-outline-primary">
+                <i class="fas fa-list me-2"></i>Все советы
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

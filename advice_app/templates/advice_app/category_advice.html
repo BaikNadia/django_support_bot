@@ -1,0 +1,67 @@
+{% extends 'advice_app/base.html' %}
+
+{% block title %}{{ category_name }} - Советы Доброты{% endblock %}
+
+{% block content %}
+<div class="row mb-5">
+    <div class="col-12 text-center">
+        <div class="emoji-large">{{ category_emoji }}</div>
+        <h1 class="fw-bold mb-3">{{ category_name }}</h1>
+        <p class="lead text-muted">
+            {% if category == 'motivation' %}
+            Советы для поднятия духа и энергии
+            {% elif category == 'comfort' %}
+            Слова поддержки для трудных моментов
+            {% elif category == 'inspiration' %}
+            Идеи для творчества и вдохновения
+            {% elif category == 'wisdom' %}
+            Жизненные уроки и мудрость
+            {% endif %}
+        </p>
+
+        <div class="d-flex justify-content-center gap-2 mb-4">
+            <a href="{% url 'all_advice' %}" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left me-2"></i>Все категории
+            </a>
+            <a href="{% url 'random_advice' %}" class="btn btn-primary-custom">
+                <i class="fas fa-random me-2"></i>Случайный совет
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    {% for advice in advice_list %}
+    <div class="col-lg-6 mb-4">
+        <div class="advice-card p-4 h-100">
+            <div class="advice-text">
+                {{ advice.text }}
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-4">
+                <small class="text-muted">
+                    <i class="far fa-calendar me-1"></i>{{ advice.created_at|date:"d.m.Y" }}
+                </small>
+                <div>
+                    <button class="btn btn-sm btn-outline-secondary copy-advice me-2"
+                            data-text="{{ advice.text }}">
+                        <i class="far fa-copy"></i> Копировать
+                    </button>
+                    <a href="{% url 'advice_detail' advice.id %}" class="btn btn-sm btn-outline-primary">
+                        Подробнее
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12 text-center py-5">
+        <div class="emoji-large">😔</div>
+        <h3>В этой категории пока нет советов</h3>
+        <p class="text-muted mb-4">Но скоро они обязательно появятся!</p>
+        <a href="{% url 'all_advice' %}" class="btn btn-primary-custom">
+            <i class="fas fa-list me-2"></i>Посмотреть другие категории
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

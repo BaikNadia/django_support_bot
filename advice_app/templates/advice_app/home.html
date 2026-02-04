@@ -1,0 +1,127 @@
+{% extends 'advice_app/base.html' %}
+
+{% block title %}Главная - Советы Доброты{% endblock %}
+
+{% block content %}
+<!-- Герой секция -->
+<div class="row justify-content-center mb-5">
+    <div class="col-lg-10 text-center">
+        <div class="mb-4">
+            <div class="emoji-large">🤗</div>
+            <h1 class="hero-title mb-3">Бот поддержки с добрыми советами</h1>
+            <p class="lead fs-4 text-muted">
+                Здесь ты найдёшь слова поддержки, мотивации и мудрости для любого момента жизни.
+            </p>
+        </div>
+
+        <!-- Кнопки действий -->
+        <div class="d-flex flex-wrap justify-content-center gap-3 mb-5">
+            <a href="{% url 'random_advice' %}" class="btn btn-primary-custom pulse">
+                <i class="fas fa-random me-2"></i>Случайный совет
+            </a>
+            <a href="{% url 'all_advice' %}" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-list me-2"></i>Все советы
+            </a>
+            <a href="https://t.me/your_bot_username" class="telegram-btn" target="_blank">
+                <i class="fab fa-telegram-plane me-2"></i>Telegram бот
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Категории -->
+<div class="row mb-5">
+    <div class="col-12 text-center mb-4">
+        <h2 class="fw-bold"><i class="fas fa-filter me-2"></i>Выбери категорию</h2>
+        <p class="text-muted">Найди именно то, что нужно тебе сейчас</p>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="category-btn active" onclick="location.href='{% url 'category_advice' 'motivation' %}'">
+            <div class="emoji-large">💪</div>
+            <h4>Мотивация</h4>
+            <p class="text-muted">Для поднятия духа и энергии</p>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="category-btn" onclick="location.href='{% url 'category_advice' 'comfort' %}'">
+            <div class="emoji-large">🤗</div>
+            <h4>Утешение</h4>
+            <p class="text-muted">Когда грустно или трудно</p>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="category-btn" onclick="location.href='{% url 'category_advice' 'inspiration' %}'">
+            <div class="emoji-large">✨</div>
+            <h4>Вдохновение</h4>
+            <p class="text-muted">Для новых идей и творчества</p>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="category-btn" onclick="location.href='{% url 'category_advice' 'wisdom' %}'">
+            <div class="emoji-large">🧠</div>
+            <h4>Мудрость</h4>
+            <p class="text-muted">Жизненные уроки и опыт</p>
+        </div>
+    </div>
+</div>
+
+<!-- Последние советы -->
+<div class="row mb-5">
+    <div class="col-12 text-center mb-4">
+        <h2 class="fw-bold"><i class="fas fa-star me-2"></i>Последние добавленные советы</h2>
+    </div>
+
+    {% for advice in latest_advice %}
+    <div class="col-md-4 mb-4">
+        <div class="advice-card p-4 h-100">
+            <span class="category-badge {{ advice.category }}">
+                {{ advice.get_category_display }}
+            </span>
+            <div class="advice-text">
+                {{ advice.text|truncatechars:150 }}
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <small class="text-muted">
+                    <i class="far fa-calendar me-1"></i>{{ advice.created_at|date:"d.m.Y" }}
+                </small>
+                <a href="{% url 'advice_detail' advice.id %}" class="btn btn-sm btn-outline-primary">
+                    Читать полностью <i class="fas fa-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Статистика -->
+<div class="row text-center mb-5">
+    <div class="col-md-3 col-6 mb-3">
+        <div class="p-4 bg-white rounded shadow-sm">
+            <h2 class="fw-bold text-primary">{{ total_advice }}</h2>
+            <p class="mb-0">Всего советов</p>
+        </div>
+    </div>
+    <div class="col-md-3 col-6 mb-3">
+        <div class="p-4 bg-white rounded shadow-sm">
+            <h2 class="fw-bold text-success">{{ categories_count.motivation }}</h2>
+            <p class="mb-0">Мотивация</p>
+        </div>
+    </div>
+    <div class="col-md-3 col-6 mb-3">
+        <div class="p-4 bg-white rounded shadow-sm">
+            <h2 class="fw-bold text-info">{{ categories_count.comfort }}</h2>
+            <p class="mb-0">Утешение</p>
+        </div>
+    </div>
+    <div class="col-md-3 col-6 mb-3">
+        <div class="p-4 bg-white rounded shadow-sm">
+            <h2 class="fw-bold text-warning">{{ categories_count.inspiration }}</h2>
+            <p class="mb-0">Вдохновение</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
